@@ -17,3 +17,7 @@ lR3
 S_V_in_RC1 = subset(whole, RC1 == "S")$log_R3
 O_V_in_RC1 = subset(whole, RC1 == "O")$log_R4
 t.test(S_V_in_RC1, O_V_in_RC1)
+
+S_V_in_RC2 = subset(whole, RC2 == "S")$ln_R7
+O_V_in_RC2 = subset(whole, RC2 == "O")$ln_R8
+t.test(S_V_in_RC2, O_V_in_RC2)
