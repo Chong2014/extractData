@@ -26,14 +26,15 @@ t.test(S_V_in_RC2, O_V_in_RC2) #significant
 
 #V1 in RC1
 SS_V_in_RC1 = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R3
-SO_V_in_RC1 = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_R4
-OS_V_in_RC1 = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_R3
+SO_V_in_RC1 = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_R3
+OS_V_in_RC1 = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_R4
 OO_V_in_RC1 = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_R4
-t.test(SS_V_in_RC1, SO_V_in_RC1) #significant
-t.test(OS_V_in_RC1, OO_V_in_RC1) #significant
+t.test(SS_V_in_RC1, SO_V_in_RC1) #not significant
+t.test(OS_V_in_RC1, OO_V_in_RC1) #not significant
 t.test(SO_V_in_RC1, OS_V_in_RC1) #significant
 t.test(SS_V_in_RC1, OS_V_in_RC1) #significant
 t.test(SO_V_in_RC1, OO_V_in_RC1) #significant
+t.test(SS_V_in_RC1, OO_V_in_RC1) #significant
 
 #V2 in RC2
 SS_V_in_RC2 = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R7
@@ -46,6 +47,17 @@ t.test(SO_V_in_RC2, OS_V_in_RC2) #not significant
 t.test(SS_V_in_RC2, OS_V_in_RC2) #not significant
 t.test(SO_V_in_RC2, OO_V_in_RC2) #not significant
 
+#V2 in RC2 (not logged)
+SS_V_in_RC2 = SS$regionExp_response_7.rt
+SO_V_in_RC2 = SO$regionExp_response_8.rt
+OS_V_in_RC2 = OS$regionExp_response_7.rt
+OO_V_in_RC2 = OO$regionExp_response_8.rt
+t.test(SS_V_in_RC2, SO_V_in_RC2) #significant
+t.test(OS_V_in_RC2, OO_V_in_RC2) #significant
+t.test(SO_V_in_RC2, OS_V_in_RC2) #significant
+t.test(SS_V_in_RC2, OS_V_in_RC2) #not significant
+t.test(SO_V_in_RC2, OO_V_in_RC2) #not significant
+t.test(OO_V_in_RC2, SS_V_in_RC2) #significant
 
 #Edge of RC2
 SS_edge_RC2 = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R6
@@ -57,7 +69,7 @@ t.test(OS_edge_RC2, OO_edge_RC2) #not significant
 t.test(SO_edge_RC2, OS_edge_RC2) #not significant
 t.test(SS_edge_RC2, OO_edge_RC2) #not significant
 
-#Main Verb
+#main verb
 SS_main_verb = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R10
 SO_main_verb = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_R10
 OS_main_verb = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_R10
@@ -68,3 +80,40 @@ t.test(OS_main_verb, OO_main_verb) #not significant
 t.test(SS_main_verb, OO_main_verb) #not significant
 t.test(SS_main_verb, OS_main_verb) #not significant
 t.test(SO_main_verb, OO_main_verb) #not significant
+
+#sentence without head NP, AdvP
+SS_sentence = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R23467810
+SO_sentence = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_R23467810
+OS_sentence = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_R23467810
+OO_sentence = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_R23467810
+t.test(SS_sentence, SO_sentence) #not significant
+t.test(OS_sentence, OO_sentence) #not significant
+t.test(SS_sentence, OS_sentence) #significant
+t.test(SS_sentence, OO_sentence) #significant
+
+#sentence without head NP, AdvP, final main verb.
+SS_sentence_noMainV = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R234678
+SO_sentence_noMainV = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_R234678
+OS_sentence_noMainV = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_R234678
+OO_sentence_noMainV = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_R234678
+t.test(SS_sentence_noMainV, SO_sentence_noMainV) #not significant
+t.test(OS_sentence_noMainV, OO_sentence_noMainV) #not significant
+t.test(SS_sentence_noMainV, OS_sentence_noMainV) #significant
+t.test(SS_sentence_noMainV, OO_sentence_noMainV) #significant
+
+#RC1, 3 regions
+SS_RC1_rt = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_RC1_rt
+SO_RC1_rt = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_RC1_rt
+OS_RC1_rt = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_RC1_rt
+OO_RC1_rt = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_RC1_rt
+t.test(SS_RC1_rt, SO_RC1_rt)
+t.test(OS_RC1_rt, OO_RC1_rt)
+t.test(SO_RC1_rt, OO_RC1_rt)
+
+#RC2, 3 regions
+SS_RC2_rt = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_RC2_rt
+SO_RC2_rt = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_RC2_rt
+OS_RC2_rt = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_RC2_rt
+OO_RC2_rt = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_RC2_rt
+t.test(SS_RC2_rt, SO_RC2_rt)
+t.test(OS_RC2_rt, OO_RC2_rt)
