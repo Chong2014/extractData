@@ -57,7 +57,7 @@ t.test(OS_edge_RC2, OO_edge_RC2) #not significant
 t.test(SO_edge_RC2, OS_edge_RC2) #not significant
 t.test(SS_edge_RC2, OO_edge_RC2) #not significant
 
-#main verb
+#Main Verb
 SS_main_verb = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R10
 SO_main_verb = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_R10
 OS_main_verb = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_R10
