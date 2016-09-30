@@ -117,3 +117,14 @@ OS_RC2_rt = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_RC2_rt
 OO_RC2_rt = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_RC2_rt
 t.test(SS_RC2_rt, SO_RC2_rt)
 t.test(OS_RC2_rt, OO_RC2_rt)
+
+#RC1verb+NP and RC2verb+NP (R3478)
+lR3478 = lmer (log_R3478 ~ RCtype*Matching + (1|Participant)+(1|Item), wholeENG)
+summary(lR3478)
+SS_R3478_rt = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R3478
+SO_R3478_rt = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_R3478
+OS_R3478_rt = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_R3478
+OO_R3478_rt = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_R3478
+t.test(SS_R3478_rt, SO_R3478_rt)
+t.test(OS_R3478_rt, OO_R3478_rt)
+t.test(SS_R3478_rt, OO_R3478_rt)
