@@ -194,3 +194,14 @@ t.test(SO_R3468910_rt, OS_R3468910_rt) #not significant
 t.test(SS_R3468910_rt, OS_R3468910_rt) #not significant
 t.test(SO_R3468910_rt, OO_R3468910_rt) #not significant
 
+#RC1verb+NP and RC2verb+NP (R3489)
+lR3489 = lmer (log_R3489 ~ RCtype*Matching + (1|Participant)+(1|Item), wholeCHN)
+summary(lR3478)
+SS_R3489_rt = subset(wholeCHN, RC1 == "S" & RC2 == "S")$log_R3489
+SO_R3489_rt = subset(wholeCHN, RC1 == "S" & RC2 == "O")$log_R3489
+OS_R3489_rt = subset(wholeCHN, RC1 == "O" & RC2 == "S")$log_R3489
+OO_R3489_rt = subset(wholeCHN, RC1 == "O" & RC2 == "O")$log_R3489
+t.test(SS_R3489_rt, SO_R3489_rt) #not significant
+t.test(OS_R3489_rt, OO_R3489_rt) #not significant
+t.test(SS_R3489_rt, OO_R3489_rt) #not significant
+t.test(OS_R3489_rt, SO_R3489_rt) #not significant
