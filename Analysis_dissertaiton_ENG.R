@@ -128,3 +128,17 @@ OO_R3478_rt = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_R3478
 t.test(SS_R3478_rt, SO_R3478_rt)
 t.test(OS_R3478_rt, OO_R3478_rt)
 t.test(SS_R3478_rt, OO_R3478_rt)
+
+#RC2, R78 only
+lR78 = lmer (log_R78 ~ log_R34 * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG)
+summary(lR78)
+SS_R78_rt = subset(wholeENG, RC1 == "S" & RC2 == "S")$log_R78
+SO_R78_rt = subset(wholeENG, RC1 == "S" & RC2 == "O")$log_R78
+OS_R78_rt = subset(wholeENG, RC1 == "O" & RC2 == "S")$log_R78
+OO_R78_rt = subset(wholeENG, RC1 == "O" & RC2 == "O")$log_R78
+t.test(SS_R78_rt, SO_R78_rt)
+t.test(OS_R78_rt, OO_R78_rt)
+t.test(SS_R78_rt, OO_R78_rt)
+
+lR34 = lmer (log_R34 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeENG)
+summary(lR34)
