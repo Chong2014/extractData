@@ -1,5 +1,5 @@
 library(lme4)
-wholeCHN = read.csv("/Users/chongzhang/Desktop/CHN.csv")
+wholeCHN = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQL/csv files/CHN.csv")
 summary(wholeCHN)
 head(wholeCHN)
 SS = subset(wholeCHN, RCtype == "SS")

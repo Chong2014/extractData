@@ -1,42 +1,51 @@
 library(lme4)
-wholeCHN_CORR_over70 = read.csv("/Users/chongzhang/Desktop/CHN_CORR_over70.csv")
+wholeCHN_CORR_over70 = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQL/csv files/CHN_CORR_over70.csv")
 summary(wholeCHN_CORR_over70)
 
-lR34 = lmer (log_R34 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeENG_CORR_over70)
+lR34 = lmer (log_R34 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70)
 summary(lR34)
 
-RC1_S = subset(wholeENG_CORR_over70, RC1 == "S")$log_R34
-RC1_O = subset(wholeENG_CORR_over70, RC1 == "O")$log_R34
-t.test(RC1_S, RC1_O)# sig. t = -7.1187, df = 1433.1, p-value = 1.718e-12
+RC1_S = subset(wholeCHN_CORR_over70, RC1 == "S")$log_R34
+RC1_O = subset(wholeCHN_CORR_over70, RC1 == "O")$log_R34
+t.test(RC1_S, RC1_O)# t = 4.0657, df = 1504.9, p-value = 5.036e-05
 
-SS_R78_rt = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "S")$log_R78
-SO_R78_rt = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "O")$log_R78
-OS_R78_rt = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "S")$log_R78
-OO_R78_rt = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "O")$log_R78
-t.test(SS_R78_rt, SO_R78_rt) #not sig.
-t.test(OS_R78_rt, OO_R78_rt) #t = 2.3917, df = 704.91, p-value = 0.01703
-
+#RC2 on four levels:
+SS_R89_rt = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "S")$log_R89
+SO_R89_rt = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "O")$log_R89
+OS_R89_rt = subset(wholeCHN_CORR_over70, RC1 == "O" & RC2 == "S")$log_R89
+OO_R89_rt = subset(wholeCHN_CORR_over70, RC1 == "O" & RC2 == "O")$log_R89
+t.test(SS_R89_rt, SO_R89_rt) #sig. t = -3.531, df = 777.91, p-value = 0.0004384; 3.166057  3.229264
+t.test(OS_R89_rt, OO_R89_rt) #not sig. ;3.245063  3.216498 
+#SS *>> OO >> SO >> OS
+t.test(OS_R89_rt, SO_R89_rt) #not sig.
+t.test(SS_R89_rt, OO_R89_rt) #sig. t = -2.7894, df = 777.93, p-value = 0.00541
+t.test(SO_R89_rt, OO_R89_rt) #not sig.
+ 
 #compare SS+OS and OO+SO in RC2:
-lR78 = lmer (log_R78 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeENG_CORR_over70)
-summary(lR78)
+lR89 = lmer (log_R89 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70)
+summary(lR89)
 
-lR78_onRC1 = lmer (log_R78 ~ log_R34 * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG_CORR_over70)
-summary(lR78_onRC1)
+lR89_onRC1 = lmer (log_R89 ~ log_R34 * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeCHN_CORR_over70)
+summary(lR89_onRC1)
 
-RC2_S = subset(wholeENG_CORR_over70, RC2 == "S")$log_R78
-RC2_O = subset(wholeENG_CORR_over70, RC2 == "O")$log_R78
-t.test(RC2_S, RC2_O) #t = 2.3727, df = 1427.5, p-value = 0.01779; 3.198157  3.165546 
+RC2_S = subset(wholeCHN_CORR_over70, RC2 == "S")$log_R89
+RC2_O = subset(wholeCHN_CORR_over70, RC2 == "O")$log_R89
+t.test(RC2_S, RC2_O) #not sig. t = -1.2931, df = 1542.9, p-value = 0.1962 
 
-#RC1+RC2, i.e. R3478
-lR3478 = lmer (log_R3478 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeENG_CORR_over70)
-summary(lR3478)
-RCs_SS = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "S")$log_R3478
-RCs_SO = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "O")$log_R3478
-RCs_OS = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "S")$log_R3478
-RCs_OO = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "O")$log_R3478
-t.test(RCs_SS, RCs_SO) #not sig.
-t.test(RCs_OS, RCs_OO) #not sig.
-t.test(RCs_SS, RCs_OO) #t = -2.7344, df = 712.88, p-value = 0.006405
+#RC1+RC2, i.e. R3489
+lR3489 = lmer (log_R3478 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70)
+summary(lR3489)
+RCs_SS = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "S")$log_R3489
+RCs_SO = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "O")$log_R3489
+RCs_OS = subset(wholeCHN_CORR_over70, RC1 == "O" & RC2 == "S")$log_R3489
+RCs_OO = subset(wholeCHN_CORR_over70, RC1 == "O" & RC2 == "O")$log_R3489
+t.test(RCs_SS, RCs_SO) #sig. t = -2.309, df = 773.29, p-value = 0.02121; 3.490907  3.525842 
+t.test(RCs_OS, RCs_OO) #not sig.;3.514294  3.491944 
+#SS >> OO >> OS >> SO
+t.test(RCs_SS, RCs_OO) #not sig.
+t.test(RCs_OS, RCs_SO) #not sig.
+t.test(RCs_SS, RCs_OS) #not sig.
+t.test(RCs_SO, RCs_OO) #sig. t = 2.3459, df = 777.91, p-value = 0.01923
 
 #Verb in RC1:
 RC1_verb_S = subset(wholeENG_CORR_over70, RC1 == "S")$log_R3

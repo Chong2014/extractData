@@ -14,7 +14,13 @@ SO_R78_rt = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "O")$log_R78
 OS_R78_rt = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "S")$log_R78
 OO_R78_rt = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "O")$log_R78
 t.test(SS_R78_rt, SO_R78_rt) #not sig.
-t.test(OS_R78_rt, OO_R78_rt) #t = 2.3917, df = 704.91, p-value = 0.01703
+t.test(OS_R78_rt, OO_R78_rt) #sig. t = 2.3917, df = 704.91, p-value = 0.01703
+#OO >> SO >> SS >> OS
+t.test(SS_R78_rt, OO_R78_rt) #sig. t = 2.3511, df = 717.53, p-value = 0.01899
+t.test(SO_R78_rt, OO_R78_rt) #not sig
+# OO *>> SS
+t.test(SO_R78_rt, OS_R78_rt) #not sig
+t.test(SS_R78_rt, OS_R78_rt) #not sig
 
 #compare SS+OS and OO+SO in RC2:
 lR78 = lmer (log_R78 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeENG_CORR_over70)
