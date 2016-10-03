@@ -33,7 +33,7 @@ RC2_O = subset(wholeCHN_CORR_over70, RC2 == "O")$log_R89
 t.test(RC2_S, RC2_O) #not sig. t = -1.2931, df = 1542.9, p-value = 0.1962 
 
 #RC1+RC2, i.e. R3489
-lR3489 = lmer (log_R3478 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70)
+lR3489 = lmer (log_R3489 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70)
 summary(lR3489)
 RCs_SS = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "S")$log_R3489
 RCs_SO = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "O")$log_R3489
@@ -46,6 +46,7 @@ t.test(RCs_SS, RCs_OO) #not sig.
 t.test(RCs_OS, RCs_SO) #not sig.
 t.test(RCs_SS, RCs_OS) #not sig.
 t.test(RCs_SO, RCs_OO) #sig. t = 2.3459, df = 777.91, p-value = 0.01923
+t.test(RCs_OS, RCs_OO)
 
 #Verb in RC1:
 RC1_verb_S = subset(wholeCHN_CORR_over70, RC1 == "S")$log_R3
