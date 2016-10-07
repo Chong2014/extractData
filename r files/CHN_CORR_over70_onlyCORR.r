@@ -2,6 +2,8 @@ library(lme4)
 wholeCHN_CORR_over70_onlyCORR = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQL/csv files/CHN_CORR_over70_onlyCORR.csv")
 summary(wholeCHN_CORR_over70_onlyCORR)
 
+lR34withCorr = lmer (log_R34 ~ CORR * RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70_onlyCORR)
+summary(lR34withCorr)
 lR34 = lmer (log_R34 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70_onlyCORR)
 summary(lR34)
 

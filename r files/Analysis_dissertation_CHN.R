@@ -14,6 +14,12 @@ OO = subset(wholeCHN, RCtype == "OO")
 lR11 = lmer (log_R11 ~ RCtype*Matching + (1|Participant)+(1|Item), whole)
 summary(lR11)
 
+lR34 = lmer (log_R34 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN)
+summary(lR34)
+
+lR34withCorr = lmer (log_R34 ~ CORR * RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN)
+summary(lR34withCorr)
+
 #Verb in RC1, SS+SO compared with OS+OO
 S_V_in_RC1 = subset(wholeCHN, RC1 == "S")$log_R3
 O_V_in_RC1 = subset(wholeCHN, RC1 == "O")$log_R4

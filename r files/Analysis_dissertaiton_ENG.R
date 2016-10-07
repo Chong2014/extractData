@@ -1,5 +1,5 @@
 library(lme4)
-wholeENG = read.csv("/Users/chongzhang/Desktop/ENG.csv")
+wholeENG = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQL/csv files/ENG.csv")
 summary(wholeENG)
 head(wholeENG)
 SS = subset(wholeENG, RCtype == "SS")
@@ -13,6 +13,12 @@ OO = subset(wholeENG, RCtype == "OO")
 
 lR3 = lmer (log_R3 ~ RCtype*Matching + (1|Participant)+(1|Item), wholeENG)
 lR3
+
+lR34withCorr = lmer (log_R34+log_R78 ~ CORR * RC1 * RC2 + (1|Participant)+(1|Item), wholeENG)
+summary(lR34withCorr)
+
+lR34withCorr = lmer (log_R34 ~ CORR * RC1 * RC2 + (1|Participant)+(1|Item), wholeENG)
+summary(lR34withCorr)
 
 #V1 in RC1, S vs. O
 S_V_in_RC1 = subset(wholeENG, RC1 == "S")$log_R3

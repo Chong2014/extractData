@@ -5,6 +5,11 @@ summary(wholeCHN_CORR_over70)
 lR34 = lmer (log_R34 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70)
 summary(lR34)
 
+lR34withCorr = lmer (log_R34 ~ CORR * RC1 * RC2 + (1|Participant)+(1|Item), wholeCHN_CORR_over70)
+summary(lR34withCorr)
+
+
+
 RC1_S = subset(wholeCHN_CORR_over70, RC1 == "S")$log_R34
 RC1_O = subset(wholeCHN_CORR_over70, RC1 == "O")$log_R34
 t.test(RC1_S, RC1_O)# t = 4.0657, df = 1504.9, p-value = 5.036e-05
