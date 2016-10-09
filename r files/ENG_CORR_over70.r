@@ -103,3 +103,9 @@ t.test(main_verb_OS, main_verb_OO) #not sig.
 #OS >> SS >> OO >> SO
 t.test(main_verb_OS, main_verb_SO) #t = -2.1665, df = 674.05, p-value = 0.03062
 
+lR78 = lmer (log_R78 ~ log_R34 * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG_CORR_over70)
+summary(lR78)
+
+lR78withoutR34 = lmer (log_R78 ~ RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG_CORR_over70)
+summary(lR78withoutR34)
+

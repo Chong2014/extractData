@@ -146,5 +146,8 @@ t.test(SS_R78_rt, SO_R78_rt)
 t.test(OS_R78_rt, OO_R78_rt)
 t.test(SS_R78_rt, OO_R78_rt)
 
-lR34 = lmer (log_R34 ~ RC1 * RC2 + (1|Participant)+(1|Item), wholeENG)
-summary(lR34)
+lR78 = lmer (log_R78 ~ log_R34 * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG)
+summary(lR78)
+
+lR78withoutR34 = lmer (log_R78 ~ RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG)
+summary(lR78)
