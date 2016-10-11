@@ -103,9 +103,82 @@ t.test(main_verb_OS, main_verb_OO) #not sig.
 #OS >> SS >> OO >> SO
 t.test(main_verb_OS, main_verb_SO) #t = -2.1665, df = 674.05, p-value = 0.03062
 
-lR78 = lmer (log_R78 ~ log_R34 * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG_CORR_over70)
+lR78 = lmer (log_R78 ~ log_R34 * Rctype + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG_CORR_over70)
 summary(lR78)
 
-lR78withoutR34 = lmer (log_R78 ~ RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG_CORR_over70)
+lR78withoutR34 = lmer (log_R78 ~  Rctype + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG_CORR_over70)
 summary(lR78withoutR34)
+
+#region 7
+r7_SS = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "S")$log_R7
+r7_SO = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "O")$log_R7
+r7_OS = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "S")$log_R7
+r7_OO = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "O")$log_R7
+t.test(r7_SS, r7_SO) #not sig.
+t.test(r7_OS, r7_OO) #not sig.
+t.test(r7_OS, r7_SS) #almost sig.
+t.test(r7_OO, r7_SO) #not sig.
+
+#region 8
+r8_SS = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "S")$log_R8
+r8_SO = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "O")$log_R8
+r8_OS = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "S")$log_R8
+r8_OO = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "O")$log_R8
+t.test(r8_SS, r8_SO) #not sig.
+t.test(r8_OS, r8_OO) #sig.
+t.test(r8_OS, r8_SS) #sig.
+t.test(r8_OO, r8_SO) #not sig.
+t.test(r8_SS, r8_OS) #sig. IMPORTANT
+t.test(r8_SS, r8_OO)
+
+#RC2 integration
+rc2integration_SS = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "S")$log_R7
+rc2integration_SO = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "O")$log_R8
+rc2integration_OS = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "S")$log_R7
+rc2integration_OO = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "O")$log_R8
+t.test(rc2integration_SS, rc2integration_SO)
+t.test(rc2integration_OS, rc2integration_OO)
+
+#RC2 noun
+rc2noun_SS = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "S")$log_R8
+rc2noun_SO = subset(wholeENG_CORR_over70, RC1 == "S" & RC2 == "O")$log_R7
+rc2noun_OS = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "S")$log_R8
+rc2noun_OO = subset(wholeENG_CORR_over70, RC1 == "O" & RC2 == "O")$log_R7
+t.test(rc2noun_SS, rc2noun_SO)
+t.test(rc2noun_OS, rc2noun_OO)
+t.test(rc2noun_SO, rc2noun_OO)
+t.test(rc2noun_SO, rc2noun_OS)
+
+###10/10###
+
+tapply(wholeENG_CORR_over70$log_R78, wholeENG_CORR_over70$Rctype, mean)
+#helmert coding
+my.helmert = matrix(c(3/4, -1/4, -1/4, -1/4, 0, 2/3, -1/3, -1/3, 0, 0, 1/2, -1/2), ncol = 3)
+my.helmert
+#assigning the new helmert coding to Rctype
+contrasts(wholeENG_CORR_over70$Rctype) = my.helmert
+#the regression
+SS_SO = subset(wholeENG_CORR_over70, RC1 == "S")
+OS_OO = subset(wholeENG_CORR_over70, RC1 == "O")
+SS_OS = subset(wholeENG_CORR_over70, RC2 == "S")
+SO_OO = subset(wholeENG_CORR_over70, RC2 == "O")
+SO_OS = subset(wholeENG_CORR_over70, Rctype == "SO" | Rctype == "OS")
+SS_OO = subset(wholeENG_CORR_over70, Rctype == "SS" | Rctype == "OO")
+#SS vs. SO
+summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SS_SO))
+#OO vs. OS
+summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), OS_OO))
+#SS vs. SO
+summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OS))
+#OO vs. SO almost significant 
+summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO))
+library(lmerTest)
+anova(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO))
+#SO vs. OS
+summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OS))
+#SS vs. OO
+summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OO))
+#-----------------------------------------------------------------------------------#
+summary(lmer(log_R8 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO)) #not sig
+summary(lmer(log_R7 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OS)) #sig
 

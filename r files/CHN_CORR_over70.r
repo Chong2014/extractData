@@ -121,4 +121,16 @@ t.test(head_NP_OS, head_NP_OO) #sig. t = 2.522, df = 774.14, p-value = 0.01187
 t.test(head_NP_SS, head_NP_OO) #not sig.
 t.test(head_NP_OS, head_NP_SO) #not sig.
 
+#region 7
+r8_SS = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "S")$log_R8
+r8_SO = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "O")$log_R8
+r8_OS = subset(wholeCHN_CORR_over70, RC1 == "O" & RC2 == "S")$log_R8
+r8_OO = subset(wholeCHN_CORR_over70, RC1 == "O" & RC2 == "O")$log_R8
+
+#region 8
+r9_SS = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "S")$log_R9
+r9_SO = subset(wholeCHN_CORR_over70, RC1 == "S" & RC2 == "O")$log_R9
+r9_OS = subset(wholeCHN_CORR_over70, RC1 == "O" & RC2 == "S")$log_R9
+r9_OO = subset(wholeCHN_CORR_over70, RC1 == "O" & RC2 == "O")$log_R9
+
 
