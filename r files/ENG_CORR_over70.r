@@ -164,19 +164,19 @@ SS_OS = subset(wholeENG_CORR_over70, RC2 == "S")
 SO_OO = subset(wholeENG_CORR_over70, RC2 == "O")
 SO_OS = subset(wholeENG_CORR_over70, Rctype == "SO" | Rctype == "OS")
 SS_OO = subset(wholeENG_CORR_over70, Rctype == "SS" | Rctype == "OO")
-#SS vs. SO
+#SS vs. SO #not sig.
 summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SS_SO))
-#OO vs. OS
+#OO vs. OS #sig
 summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), OS_OO))
-#SS vs. SO
+#SS vs. SO #not sig.
 summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OS))
 #OO vs. SO almost significant 
 summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO))
 library(lmerTest)
 anova(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO))
-#SO vs. OS
+#SO vs. OS #not sig.
 summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OS))
-#SS vs. OO
+#SS vs. OO #sig
 summary(lmer(log_R78 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OO))
 #-----------------------------------------------------------------------------------#
 summary(lmer(log_R8 ~ Rctype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO)) #not sig
