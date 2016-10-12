@@ -178,4 +178,9 @@ summary(lmer(log_R8 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO))
 summary(lmer(log_R7 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OS)) #sig
 
 
+#10/12
+lR78 = lmer (log_R78 ~ dprimeT * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG)
+summary(lR78)
 
+lR78withoutR34 = lmer (log_R78 ~ RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG)
+summary(lR78)
