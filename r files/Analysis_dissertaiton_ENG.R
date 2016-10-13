@@ -1,4 +1,5 @@
 library(lme4)
+library(lmerTest)
 wholeENG = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQL/csv files/ENG.csv")
 summary(wholeENG)
 head(wholeENG)
@@ -167,8 +168,6 @@ summary(lmer(log_R78 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), OS_OO)
 summary(lmer(log_R78 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OS))
 #OO vs. SO #not sig.
 summary(lmer(log_R78 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO))
-library(lmerTest)
-anova(lmer(log_R78 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO))
 #SO vs. OS #not sig.
 summary(lmer(log_R78 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OS))
 #SS vs. OO #sig.
@@ -177,10 +176,9 @@ summary(lmer(log_R78 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OO)
 summary(lmer(log_R8 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SO_OO)) #not sig
 summary(lmer(log_R7 ~ RCtype + (1+log_R34|Participant)+(1+log_R34|Item), SS_OS)) #sig
 
-
+#-----------------------------------------------------------------------------------#
 #10/12
 lR78 = lmer (log_R78 ~ dprimeT * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG)
 summary(lR78)
-
-lR78withoutR34 = lmer (log_R78 ~ RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG)
+lR78 = lmer (log_R78 ~ dprimeT * log_R34 * RC1 * RC2 + (1+log_R34|Participant)+(1+log_R34|Item), wholeENG)
 summary(lR78)
