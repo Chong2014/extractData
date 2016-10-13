@@ -65,10 +65,20 @@ summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34+dprimeT|Participa
 #-----------------------------------------------------------------------------------#
 summary(lmer(log_R78 ~ dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG))
 #-----------------------------------------------------------------------------------#
-
+# OO
+m.1 = lmer(log_R78 ~ RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.1)
 #relevel: 0S
 wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "OS")
-wholeENG = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQL/csv files/ENG.csv")
-m.2 = lmer(log_R78 ~ RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+m.2 = lmer(log_R78 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
 summary(m.2)
-print(m.2)
+#relevel: SO
+wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "SO")
+m.3 = lmer(log_R78 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.3)
+#relevel: SS
+wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "SS")
+m.4 = lmer(log_R78 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.4)
+
+
