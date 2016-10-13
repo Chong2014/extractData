@@ -53,10 +53,22 @@ summary(lmer(log_R78 ~ dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log
 summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), SS_SO)) # SS vs. SO not sig.
 #OO vs. OS 
 summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), OS_OO)) #couldn't converge
-summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34|Participant)+(1+log_R34|Item), OS_OO))
-summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1|Participant)+(1|Item), OS_OO))
-summary(lmer(log_R78 ~ dprimeT * RCtype + (1|Participant)+(1|Item), OS_OO))
+summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34|Participant)+(1+log_R34|Item), OS_OO)) #???
+summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1|Participant)+(1|Item), OS_OO)) #???
+summary(lmer(log_R78 ~ dprimeT * RCtype + (1|Participant)+(1|Item), OS_OO)) #???
 summary(lmer(log_R78 ~ RCtype  + (1|Participant)+(1|Item), OS_OO))
+summary(lmer(log_R78 ~ RCtype  + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), OS_OO))
 
 #SS vs. SO 
 summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), SS_OS)) #not sig. t = 0.409
+
+#-----------------------------------------------------------------------------------#
+summary(lmer(log_R78 ~ dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG))
+#-----------------------------------------------------------------------------------#
+
+#relevel: 0S
+wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "OS")
+wholeENG = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQL/csv files/ENG.csv")
+m.2 = lmer(log_R78 ~ RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.2)
+print(m.2)
