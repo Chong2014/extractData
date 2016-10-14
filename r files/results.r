@@ -9,13 +9,12 @@ SO = subset(wholeENG, RCtype == "SO")
 OS = subset(wholeENG, RCtype == "OS")
 OO = subset(wholeENG, RCtype == "OO")
 #---------------------------------------------------------------------------------------------------------#
-#Region 7 and Region 8 (RC2)
-#---------------------------------------------------------------------------------------------------------#
+#Region78 (RC2)
 summary(SS) #log_R78: mean = 3.150
 summary(SO) #log_R78: mean = 3.133
 summary(OS) #log_R78: mean = 3.154
 summary(OO) #log_R78: mean = 3.120 
-#OO >> SO >> SS >> OS
+#---------------------------------------------------------------------------------------------------------#
 # OO
 m.1 = lmer(log_R78 ~ RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
 summary(m.1)
@@ -68,27 +67,110 @@ summary(OS) #log_R7: mean = 2.795
 summary(OO) #log_R8: mean = 2.766
 #---------------------------------------------------------------------------------------------------------#
 # OO >> SO >> OS >> SS
-# OO not >> SO
-# OS *>> SS
-#OO
-m.1.VinRC2 = lmer(log_R8 ~ RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+       |
+#----------------------
+#OO vs. SO
+m.1.VinRC2 = lmer(log_VinRC2 ~ RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
 summary(m.1.VinRC2)
 """Fixed effects:
              Estimate Std. Error        df t value Pr(>|t|)    
-(Intercept)   2.75757    0.01576  32.11000 174.930  < 2e-16 ***
-RCtypeOS      0.06847    0.01648 154.02000   4.156 5.35e-05 ***
-RCtypeSO      0.01177    0.01622 170.08000   0.725   0.4692    
-RCtypeSS      0.04141    0.01620 169.11000   2.555   0.0115 * """
+(Intercept)   2.77247    0.01636  36.70000 169.487  < 2e-16 ***
+RCtypeOS      0.02223    0.01490 229.30000   1.492    0.137    
+RCtypeSO      0.01417    0.01484 356.30000   0.954    0.340    
+RCtypeSS      0.06510    0.01482 362.30000   4.392 1.47e-05 *** """
 #---------------------------------------------------------------------------------------------------------#
-#relevel: OS
-wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "OS")
-m.2.VinRC2 = lmer(log_R7 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+#SO vs. SS
+wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "SO")
+m.2.VinRC2 = lmer(log_VinRC2 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
 summary(m.2.VinRC2)
 """Fixed effects:
-                   Estimate Std. Error        df t value Pr(>|t|)    
-(Intercept)         2.83009    0.01851  47.87000 152.936  < 2e-16 ***
-RCtypeReleveledOO   0.02907    0.01730 113.40000   1.680  0.09570 .  
-RCtypeReleveledSO   0.05551    0.01704 126.70000   3.257  0.00144 ** 
-RCtypeReleveledSS   0.04206    0.01702 127.08000   2.471  0.01480 * """
+                    Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)         2.786639   0.016567  39.700000 168.207  < 2e-16 ***
+RCtypeReleveledOO  -0.014166   0.014842 356.300000  -0.954 0.340487    
+RCtypeReleveledOS   0.008063   0.014899 333.600000   0.541 0.588752    
+RCtypeReleveledSS   0.050937   0.014571 477.900000   3.496 0.000517 *** """
 #---------------------------------------------------------------------------------------------------------#
+#Noun in RC2
+#OO vs. SO
+m.1.NinRC2 = lmer(log_NinRC2 ~ RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.1.NinRC2)
+"""Fixed effects:
+              Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)   2.845523   0.019961  84.880000 142.553   <2e-16 ***
+RCtypeOS      0.021834   0.018313 135.790000   1.192    0.235    
+RCtypeSO      0.021591   0.017813 143.990000   1.212    0.227    
+RCtypeSS     -0.006827   0.017799 142.160000  -0.384    0.702  """
+#---------------------------------------------------------------------------------------------------------#
+#SO vs. SS
+wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "SO")
+m.2.NinRC2 = lmer(log_NinRC2 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.2.NinRC2)
+"""Fixed effects:
+Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)         2.786639   0.016567  39.700000 168.207  < 2e-16 ***
+RCtypeReleveledOO  -0.014166   0.014842 356.300000  -0.954 0.340487    
+RCtypeReleveledOS   0.008063   0.014899 333.600000   0.541 0.588752    
+RCtypeReleveledSS   0.050937   0.014571 477.900000   3.496 0.000517 *** """
 
+#---------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------#                               
+# ADD MORE PREDICTORS-------------------------------------------------------------------------------------#  
+#---------------------------------------------------------------------------------------------------------#
+#---------------------------------------------------------------------------------------------------------#
+#Region78 (RC2)
+#---------------------------------------------------------------------------------------------------------#
+# OO
+m.1 = lmer(log_R78 ~ dprimeT * log_R34 * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.1)
+"""Fixed effects:
+                           Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)               2.225e+00  2.240e-01  7.810e+01   9.932 1.78e-15 ***
+dprimeT                   4.255e-01  1.462e-01  8.930e+01   2.911 0.004544 ** 
+log_R34                   2.364e-01  6.957e-02  1.107e+02   3.398 0.000944 ***
+RCtypeOS                 -4.210e-02  2.356e-01  5.839e+02  -0.179 0.858238    
+RCtypeSO                 -5.280e-02  2.482e-01  6.970e+02  -0.213 0.831614    
+RCtypeSS                 -4.427e-01  2.575e-01  7.233e+02  -1.719 0.086041 .  
+dprimeT:log_R34          -9.946e-02  4.282e-02  9.300e+01  -2.323 0.022366 *  
+dprimeT:RCtypeOS         -1.179e-01  1.493e-01  1.888e+03  -0.790 0.429780    
+dprimeT:RCtypeSO         -2.994e-02  1.547e-01  1.881e+03  -0.194 0.846534    
+dprimeT:RCtypeSS          1.448e-01  1.563e-01  1.814e+03   0.926 0.354351    
+log_R34:RCtypeOS          1.693e-02  7.299e-02  4.861e+02   0.232 0.816672    
+log_R34:RCtypeSO          2.502e-02  7.823e-02  6.060e+02   0.320 0.749229    
+log_R34:RCtypeSS          1.524e-01  8.101e-02  6.233e+02   1.881 0.060469 .  
+dprimeT:log_R34:RCtypeOS  3.924e-02  4.484e-02  1.943e+03   0.875 0.381604    
+dprimeT:log_R34:RCtypeSO  7.675e-03  4.747e-02  1.950e+03   0.162 0.871575    
+dprimeT:log_R34:RCtypeSS -4.688e-02  4.783e-02  1.870e+03  -0.980 0.327185     """
+#---------------------------------------------------------------------------------------------------------#
+m.1again = lmer(log_R78 ~ dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.1again)
+"""
+Fixed effects:
+                  Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)      2.977e+00  4.007e-02 4.633e+01  74.290  < 2e-16 ***
+dprimeT          1.252e-01  3.019e-02 4.324e+01   4.148 0.000154 ***
+RCtypeOS         3.616e-03  2.604e-02 1.522e+02   0.139 0.889746    
+RCtypeSO         1.763e-02  2.624e-02 1.724e+02   0.672 0.502504    
+RCtypeSS         2.558e-02  2.624e-02 1.720e+02   0.975 0.331053    
+dprimeT:RCtypeOS 1.726e-02  1.727e-02 7.780e+01   1.000 0.320518    
+dprimeT:RCtypeSO 8.469e-04  1.751e-02 8.160e+01   0.048 0.961533    
+dprimeT:RCtypeSS 3.644e-03  1.747e-02 8.136e+01   0.209 0.835322 """
+#---------------------------------------------------------------------------------------------------------#
+#relevel: 0S
+wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "OS")
+m.2 = lmer(log_R78 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.2)
+
+#---------------------------------------------------------------------------------------------------------#
+#relevel: SO
+wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "SO")
+m.3 = lmer(log_R78 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.3)
+
+#---------------------------------------------------------------------------------------------------------#
+#relevel: SS
+wholeENG$RCtypeReleveled = relevel(wholeENG$RCtype, "SS")
+m.4 = lmer(log_R78 ~ RCtypeReleveled + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), wholeENG)
+summary(m.4)
+"""
+ """
+#---------------------------------------------------------------------------------------------------------#

@@ -53,7 +53,7 @@ summary(lmer(log_R78 ~ dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log
 summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), SS_SO)) # SS vs. SO not sig.
 #OO vs. OS 
 summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34+dprimeT|Participant)+(1+log_R34+dprimeT|Item), OS_OO)) #couldn't converge
-summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1+log_R34|Participant)+(1+log_R34|Item), OS_OO)) #???
+summary(lmer(log_R78 ~ dprimeT * RCtype + (1+log_R34|Participant)+(1+log_R34|Item), OS_OO)) #???
 summary(lmer(log_R78 ~ log_R34 * dprimeT * RCtype + (1|Participant)+(1|Item), OS_OO)) #???
 summary(lmer(log_R78 ~ dprimeT * RCtype + (1|Participant)+(1|Item), OS_OO)) #???
 summary(lmer(log_R78 ~ RCtype  + (1|Participant)+(1|Item), OS_OO))
