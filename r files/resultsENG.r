@@ -5,8 +5,6 @@ wholeENG_CORR = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQ
 summary(wholeENG)
 summary(wholeENG_CORR)
 
-
-
 #------------------------------------------------------------------------------------------------------#
 m_Region1 = lmer(log_R1 ~ RC1fac * RC2fac + (1*dprimeT|Participant)+(1*dprimeT|Item), wholeENG)
 summary(m_Region1) #nothing is significant
@@ -87,8 +85,17 @@ summary(m_SS_OS) # not sig. RC1fac       0.01927    0.01031 36.69000    1.87   0
 m_OO_SO = lmer(log_R10 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), OO_SO)
 summary(m_OO_SO) # not sig.
 #------------------------------------------------------------------------------------------------------#
+#Checking if parallelism is significant
 #------------------------------------------------------------------------------------------------------#
-
+m_Region7_P = lmer(log_R7 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
+summary(m_Region7_P) #P not sig.
 #------------------------------------------------------------------------------------------------------#
+m_Region8_P = lmer(log_R8 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
+summary(m_Region8_P) #ParFac      -0.02266    0.01106 73.27000  -2.048   0.0441 *  
 #------------------------------------------------------------------------------------------------------#
+m_Region9_P = lmer(log_R9 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
+summary(m_Region9_P) #ParFac      -0.020940   0.009771 72.610000  -2.143   0.0355 *  
+#------------------------------------------------------------------------------------------------------#
+m_Region10_P = lmer(log_R10 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
+summary(m_Region10_P) #P not sig.
 #------------------------------------------------------------------------------------------------------#
