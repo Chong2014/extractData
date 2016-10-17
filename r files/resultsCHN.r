@@ -141,8 +141,8 @@ summary(m_OO_SO) # not sig.
 #------------------------------------------------------------------------------------------------------#
 #Checking if parallelism is significant
 #------------------------------------------------------------------------------------------------------#
-m_Region7_P = lmer(log_R7 ~ ParFac * RC2fac + (1 + dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
-summary(m_Region7_P) # not sig.
+m_Region7_P = lmer(log_R7 ~ ParFac * RC2fac + (1 * dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
+summary(m_Region7_P) # ParFac:RC2fac -0.060095   0.026254 71.080000  -2.289   0.0251 *
 #------------------------------------------------------------------------------------------------------#
 m_Region8_P = lmer(log_R8 ~ ParFac * RC2fac + (1 * dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
 summary(m_Region8_P) #RC2fac        -0.09079    0.01153 74.66000  -7.876 2.11e-11 ***
