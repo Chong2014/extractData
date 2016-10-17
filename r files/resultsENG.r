@@ -64,6 +64,19 @@ m_Region78 = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*
 summary(m_Region78) # RC2fac         0.025201   0.009754 73.930000   2.584   0.0117 * 
 m_Region789 = lmer(log_R789 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
 summary(m_Region789) #nothing sig
+
+OS_SO = subset(wholeENG, RC1fac==-0.5 & RC2fac==0.5| RC1fac==0.5 & RC2fac==-0.5)
+summary(OS_SO)
+m_Region78_OS_SO = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), OS_SO)
+summary(m_Region8910_OS_SO)
+
+SS_OS = subset(wholeENG, RC1fac==0.5 & RC2fac==0.5| RC1fac==-0.5 & RC2fac==0.5)
+m_Region78_SS_OS = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), SS_OS)
+summary(m_Region78_SS_OS) # not sig. -0.265 SS >> OS
+
+SO_OO = subset(wholeENG, RC1fac==0.5 & RC2fac==-0.5| RC1fac==-0.5 & RC2fac==-0.5)
+m_Region78_SO_OO = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), SO_OO)
+summary(m_Region78_SO_OO) # not sig. 0.932 OO >> SO
 #------------------------------------------------------------------------------------------------------#
 
 SS_OS = subset(wholeENG, RC1fac==0.5 & RC2fac==0.5| RC1fac==-0.5 & RC2fac==0.5)
