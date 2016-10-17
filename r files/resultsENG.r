@@ -60,6 +60,10 @@ summary(m_Region10) # RC1fac         0.015505   0.007164 74.120000   2.164   0.0
 m_Region10_CORR = lmer(log_R10 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG_CORR)
 summary(m_Region10_CORR) # RC1fac         1.662e-02  8.376e-03  1.538e+03   1.984   0.0474 *  
 #------------------------------------------------------------------------------------------------------#
+m_Region78 = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
+summary(m_Region78) # RC2fac         0.025201   0.009754 73.930000   2.584   0.0117 * 
+m_Region789 = lmer(log_R789 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
+summary(m_Region789) #nothing sig
 #------------------------------------------------------------------------------------------------------#
 
 SS_OS = subset(wholeENG, RC1fac==0.5 & RC2fac==0.5| RC1fac==-0.5 & RC2fac==0.5)

@@ -19,7 +19,7 @@ summary(m_Region2_CORR) #nothing is significant
 m_Region3 = lmer(log_R3 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
 summary(m_Region3) #RC1fac         0.044251   0.012267 74.500000   3.607 0.000557 ***
 m_Region3_CORR = lmer(log_R3 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN_CORR)
-summary(m_Region3_CORR) #RC1fac        -0.101044   0.012626 76.900000  -8.003 1.01e-11 ***
+summary(m_Region3_CORR)
 #------------------------------------------------------------------------------------------------------#
 m_Region4 = lmer(log_R4 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
 summary(m_Region4) # RC1fac        -0.10052    0.01122 74.23000  -8.961 1.92e-13 ***
@@ -72,7 +72,14 @@ m_Region12_CORR = lmer(log_R12 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant
 summary(m_Region12_CORR) # RC2fac         1.927e-02  9.092e-03  1.666e+03   2.119  0.03420 *  
                          # RC1fac:RC2fac -5.385e-02  1.820e-02  1.667e+03  -2.958  0.00314 **  
 #------------------------------------------------------------------------------------------------------#
-
+m_Region89 = lmer(log_R89 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
+summary(m_Region89) # RC1fac        -2.303e-02  9.948e-03  2.103e+03  -2.315  0.02072 *  
+                    # RC2fac        -2.315e-02  9.948e-03  2.103e+03  -2.327  0.02008 *  
+                    # RC1fac:RC2fac -7.591e-02  1.990e-02  2.103e+03  -3.815  0.00014 ***
+m_Region8910 = lmer(log_R8910 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
+summary(m_Region8910) # RC1fac        -2.293e-02  8.834e-03  2.103e+03  -2.595  0.00951 ** 
+                      # RC2fac        -2.809e-02  8.834e-03  2.103e+03  -3.180  0.00149 ** 
+                      # RC1fac:RC2fac -7.469e-02  1.767e-02  2.103e+03  -4.227 2.47e-05 ***
 #------------------------------------------------------------------------------------------------------#
 #------------------------------------------------------------------------------------------------------#
 
