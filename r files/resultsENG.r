@@ -104,15 +104,16 @@ summary(m_OO_SO) # not sig.
 #------------------------------------------------------------------------------------------------------#
 #Checking if parallelism is significant
 #------------------------------------------------------------------------------------------------------#
-m_Region7_P = lmer(log_R7 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
-summary(m_Region7_P) #P not sig.
+
+m_Region7_P_again = lmer(log_R7 ~ ParFac * RC2fac + (1*dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeENG)
+summary(m_Region7_P_again) #ParFac:RC2fac  0.052242   0.023445 74.330000   2.228   0.0289 *
 #------------------------------------------------------------------------------------------------------#
-m_Region8_P = lmer(log_R8 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
-summary(m_Region8_P) #ParFac      -0.02266    0.01106 73.27000  -2.048   0.0441 *  
+m_Region8_P_again = lmer(log_R8 ~ ParFac * RC2fac + (1*dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeENG)
+summary(m_Region8_P_again) 
 #------------------------------------------------------------------------------------------------------#
-m_Region9_P = lmer(log_R9 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
-summary(m_Region9_P) #ParFac      -0.020940   0.009771 72.610000  -2.143   0.0355 *  
+m_Region9_P_again = lmer(log_R9 ~ ParFac * RC2fac + (1*dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeENG)
+summary(m_Region9_P_again) 
 #------------------------------------------------------------------------------------------------------#
-m_Region10_P = lmer(log_R10 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeENG)
-summary(m_Region10_P) #P not sig.
+m_Region10_P_again = lmer(log_R10 ~ ParFac * RC2fac + (1*ParFac * RC2fac|Participant)+(1|Item), wholeENG[wholeENG$CORR=="1",])
+summary(m_Region10_P_again) #ParFac:RC2fac  3.324e-02  1.675e-02  1.538e+03   1.984   0.0474 *  
 #------------------------------------------------------------------------------------------------------#

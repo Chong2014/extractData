@@ -126,24 +126,45 @@ summary(m_OO_SO) # not sig.
 #------------------------------------------------------------------------------------------------------#
 #Checking if parallelism is significant
 #------------------------------------------------------------------------------------------------------#
-m_Region7_P = lmer(log_R7 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
+m_Region7_P = lmer(log_R7 ~ ParFac * RC2fac + (1 + dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
 summary(m_Region7_P) # not sig.
 #------------------------------------------------------------------------------------------------------#
-m_Region8_P = lmer(log_R8 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
-summary(m_Region8_P) # not sig.
+m_Region8_P = lmer(log_R8 ~ ParFac * RC2fac + (1 * dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
+summary(m_Region8_P) #RC2fac        -0.09079    0.01153 74.66000  -7.876 2.11e-11 ***
+                     #ParFac:RC2fac -0.05896    0.02306 74.66000  -2.557   0.0126 *  
 #------------------------------------------------------------------------------------------------------#
-m_Region9_P = lmer(log_R9 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
-summary(m_Region9_P) # ParFac        -0.04833    0.01178 2103.00000  -4.103 4.24e-05 ***
+m_Region9_P = lmer(log_R9 ~ ParFac * RC2fac + (1 * dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
+summary(m_Region9_P)  # ParFac          -0.04833    0.01178 2103.00000  -4.103 4.24e-05 ***
+                      # RC2fac           0.05180    0.01178 2103.00000   4.397 1.15e-05 ***
 #------------------------------------------------------------------------------------------------------#
-m_Region10_P = lmer(log_R10 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
-summary(m_Region10_P) # not sig.
+m_Region10_P = lmer(log_R10 ~ ParFac * RC2fac + (1 * dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
+summary(m_Region10_P) # RC2fac          -0.03397    0.01084 2103.00000  -3.134  0.00175 ** 
 #------------------------------------------------------------------------------------------------------#
-m_Region11_P = lmer(log_R11 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
-summary(m_Region11_P) # ParFac      -0.078766   0.015383 73.610000  -5.121 2.36e-06 ***
+m_Region11_P = lmer(log_R11 ~ ParFac * RC2fac + (1 * dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
+summary(m_Region11_P) # ParFac        -0.07877    0.01538 73.61000  -5.121 2.36e-06 ***
 #------------------------------------------------------------------------------------------------------#
-m_Region12_P = lmer(log_R12 ~ ParFac * RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), wholeCHN)
-summary(m_Region12_P) # ParFac      -2.015e-02  8.537e-03  2.103e+03  -2.361  0.01832 *  
+m_Region12_P = lmer(log_R12 ~ ParFac * RC2fac + (1 * dprimeT*ParFac * RC2fac|Participant)+(1|Item), wholeCHN)
+summary(m_Region12_P)  #ParFac        -2.015e-02  8.537e-03  2.103e+03  -2.361  0.01832 *  
+                       #RC2fac        -2.421e-02  8.537e-03  2.103e+03  -2.836  0.00461 **
 #------------------------------------------------------------------------------------------------------#
 
+CHN_RegNPV = read.csv("/Users/chongzhang/Onedrive/Data-Analyses-R-Python-mySQL/csv files/CHN_RegNPV.csv")
+summary(CHN_RegNPV)
+head(CHN_RegNPV)
+m_CHN_RegNPV = lmer(log_NPorV ~ REG * NPorV + (1|Participant)+(1|Item), CHN_RegNPV)
+summary(m_CHN_RegNPV)
 
+#------------------------------------------------------------------------------------------------------#
+
+m_VinRC1 = lmer(log_VinRC1 ~ RC1 + (1|Participant)+(1|Item), wholeCHN)
+summary(m_VinRC1)
+
+m_NinRC1 = lmer(log_NinRC1 ~ RC1 + (1|Participant)+(1|Item), wholeCHN)
+summary(m_NinRC1)
+
+m_VinRC2 = lmer(log_VinRC2 ~ RC2 + (1|Participant)+(1|Item), wholeCHN)
+summary(m_VinRC2)
+
+m_NinRC2 = lmer(log_NinRC2 ~ RC2 + (1|Participant)+(1|Item), wholeCHN)
+summary(m_NinRC2)
 
