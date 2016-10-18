@@ -72,13 +72,25 @@ summary(OS_SO)
 m_Region78_OS_SO = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), OS_SO)
 summary(m_Region8910_OS_SO)
 
+SS_SO = subset(wholeENG, RC1fac==0.5 & RC2fac==0.5| RC1fac==0.5 & RC2fac==-0.5)
+m_Region78_SS_SO= lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), SS_SO)
+summary(m_Region78_SS_SO) #not sig.
+
+SS_OO = subset(wholeENG, RC1fac==0.5 & RC2fac==0.5| RC1fac==-0.5 & RC2fac==-0.5)
+m_Region78_SS_OO= lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), SS_OO)
+summary(m_Region78_SS_OO) #sig.
+
 SS_OS = subset(wholeENG, RC1fac==0.5 & RC2fac==0.5| RC1fac==-0.5 & RC2fac==0.5)
 m_Region78_SS_OS = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), SS_OS)
-summary(m_Region78_SS_OS) # not sig. -0.265 SS >> OS
+summary(m_Region78_SS_OS) # not sig. -0.265 
 
 SO_OO = subset(wholeENG, RC1fac==0.5 & RC2fac==-0.5| RC1fac==-0.5 & RC2fac==-0.5)
 m_Region78_SO_OO = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), SO_OO)
-summary(m_Region78_SO_OO) # not sig. 0.932 OO >> SO
+summary(m_Region78_SO_OO) # not sig. 0.932 
+
+OS_OO = subset(wholeENG, RC1fac==-0.5 & RC2fac==0.5| RC1fac==-0.5 & RC2fac==-0.5)
+m_Region78_OS_OO = lmer(log_R78 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), OS_OO)
+summary(m_Region78_OS_OO) #sig
 #------------------------------------------------------------------------------------------------------#
 
 SS_OS = subset(wholeENG, RC1fac==0.5 & RC2fac==0.5| RC1fac==-0.5 & RC2fac==0.5)
@@ -118,6 +130,11 @@ m_Region9_P_again = lmer(log_R9 ~ ParFac * RC2fac + (1*dprimeT*ParFac * RC2fac|P
 summary(m_Region9_P_again) # ParFac        -0.020940   0.009771 72.610000  -2.143   0.0355 *  
                            # RC2fac        -0.043866   0.009771 72.610000  -4.489 2.63e-05 ***
 #------------------------------------------------------------------------------------------------------#
-m_Region10_P_again = lmer(log_R10 ~ ParFac * RC2fac + (1*ParFac * RC2fac|Participant)+(1|Item), wholeENG[wholeENG$CORR=="1",])
-summary(m_Region10_P_again) # ParFac:RC2fac  3.324e-02  1.675e-02  1.538e+03   1.984   0.0474 *  
+m_Region10_P_again = lmer(log_R10 ~ ParFac * RC2fac + (1*ParFac * RC2fac|Participant)+(1|Item), wholeENG)
+summary(m_Region10_P_again) # ParFac:RC2fac  0.031009   0.014329 74.120000   2.164   0.0337 *  
 #------------------------------------------------------------------------------------------------------#
+m_Region78_P_again = lmer(log_R78 ~ ParFac * RC2fac + (1*ParFac * RC2fac|Participant)+(1|Item), wholeENG)
+summary(m_Region78_P_again) 
+
+m_Region789_P_again = lmer(log_R789 ~ ParFac * RC2fac + (1*ParFac * RC2fac|Participant)+(1|Item), wholeENG)
+summary(m_Region789_P_again)

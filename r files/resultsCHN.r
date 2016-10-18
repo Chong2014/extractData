@@ -92,7 +92,10 @@ m_Region89_SS_SO = lmer(log_R89 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participan
 summary(m_Region89_SS_SO)
 OO_SO = subset(wholeCHN, RC1fac==-0.5 & RC2fac==-0.5| RC1fac==0.5 & RC2fac==-0.5)
 m_Region89_OO_SO = lmer(log_R89 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), OO_SO)
-summary(m_Region89_OO_SO)
+summary(m_Region89_OO_SO) #not sig
+OO_OS = subset(wholeCHN, RC1fac==-0.5 & RC2fac==-0.5| RC1fac==-0.5 & RC2fac==0.5)
+m_Region89_OO_OS = lmer(log_R89 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), OO_OS)
+summary(m_Region89_OO_OS) #not sig
 #------------------------------------------------------------------------------------------------------#
 #------------------------------------------------------------------------------------------------------#
 
@@ -177,15 +180,27 @@ summary(m_CHN_RegNPV)
 
 #------------------------------------------------------------------------------------------------------#
 
-m_VinRC1 = lmer(log_VinRC1 ~ RC1 + (1|Participant)+(1|Item), wholeCHN)
-summary(m_VinRC1)
+m_VinRC1 = lmer(log_VinRC1 ~ RCtype + (1|Participant)+(1|Item), wholeCHN)
+summary(m_VinRC1) #nothing sig.
 
-m_NinRC1 = lmer(log_NinRC1 ~ RC1 + (1|Participant)+(1|Item), wholeCHN)
-summary(m_NinRC1)
+m_NinRC1 = lmer(log_NinRC1 ~ RCtype + (1|Participant)+(1|Item), wholeCHN)
+summary(m_NinRC1) # OO *<< SO
+                  # OO *<< SS
 
-m_VinRC2 = lmer(log_VinRC2 ~ RC2 + (1|Participant)+(1|Item), wholeCHN)
+m_VinRC2 = lmer(log_VinRC2 ~ RCtype + (1|Participant)+(1|Item), wholeCHN)
 summary(m_VinRC2)
 
-m_NinRC2 = lmer(log_NinRC2 ~ RC2 + (1|Participant)+(1|Item), wholeCHN)
+wholeCHN$RCtypeReleveled = relevel(wholeCHN$RCtype, "OS")
+m_VinRC2 = lmer(log_VinRC2 ~ RCtypeReleveled + (1|Participant)+(1|Item), wholeCHN)
+summary(m_VinRC2)
+
+m_NinRC2 = lmer(log_NinRC2 ~ RCtype + (1|Participant)+(1|Item), wholeCHN)
 summary(m_NinRC2)
 
+wholeCHN$RCtypeReleveled = relevel(wholeCHN$RCtype, "OS")
+m_R89= lmer(log_R89 ~ RCtypeReleveled + (1|Participant)+(1|Item), wholeCHN)
+summary(m_R89)
+
+wholeCHN$RCtypeReleveled = relevel(wholeCHN$RCtype, "SS")
+m_R11= lmer(log_R11 ~ RCtypeReleveled + (1|Participant)+(1|Item), wholeCHN)
+summary(m_R11)
