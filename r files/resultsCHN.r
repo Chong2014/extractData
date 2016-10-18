@@ -86,7 +86,13 @@ summary(m_Region8910) # RC1fac        -2.293e-02  8.834e-03  2.103e+03  -2.595  
 OS_SO = subset(wholeCHN, RC1fac==-0.5 & RC2fac==0.5| RC1fac==0.5 & RC2fac==-0.5)
 summary(OS_SO)
 m_Region89_OS_SO = lmer(log_R89 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), OS_SO)
-summary(m_Region89_OS_SO) #not sig
+summary(m_Region89_OS_SO)#not sig
+SS_SO = subset(wholeCHN, RC1fac==0.5 & RC2fac==0.5| RC1fac==0.5 & RC2fac==-0.5)
+m_Region89_SS_SO = lmer(log_R89 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), SS_SO)
+summary(m_Region89_SS_SO)
+OO_SO = subset(wholeCHN, RC1fac==-0.5 & RC2fac==-0.5| RC1fac==0.5 & RC2fac==-0.5)
+m_Region89_OO_SO = lmer(log_R89 ~ RC1fac * RC2fac + (1*log_R4*dprimeT|Participant)+(1*log_R4*dprimeT|Item), OO_SO)
+summary(m_Region89_OO_SO)
 #------------------------------------------------------------------------------------------------------#
 #------------------------------------------------------------------------------------------------------#
 
