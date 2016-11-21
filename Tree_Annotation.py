@@ -1,52 +1,51 @@
-class Node: 
-    def __init__(self, name, superscript = -1, subscript = -1): 
-        self.name = name 
-        self.left = None 
-        self.right = None 
-        self.parent = None 
+class Node:
+    def __init__(self, name, superscript = -1, subscript = -1):
+        self.name = name
+        self.left = None
+        self.right = None
+        self.parent = None
         self.subscript = subscript
-        self.superscript = superscript 
-     
-class Tree: 
-    def __init__(self): 
-        self.root = None 
-        self.num = 1 
-  
-    def getRoot(self): 
-        return self.root 
- 
+        self.superscript = superscript
+class Tree:
+    def __init__(self):
+        self.root = None
+        self.num = 1
+
+    def getRoot(self):
+        return self.root
+
     def setList(self, list):
         self.list = list
-        return 
+        return
 
-    def add(self, node, newNodeName, leftOrRight): 
-        if(self.root == None): 
-            self.root = Node(newNodeName, 1, 2) 
-            return self.root 
-        else: 
-            if(leftOrRight == "0"): 
-                node.left = Node(newNodeName) 
-                node.left.parent = node 
-                return node.left 
-            else: 
-                node.right = Node(newNodeName) 
-                node.right.parent = node 
-                return node.right 
+    def add(self, node, newNodeName, leftOrRight):
+        if(self.root == None):
+            self.root = Node(newNodeName, 1, 2)
+            return self.root
+        else:
+            if(leftOrRight == "0"):
+                node.left = Node(newNodeName)
+                node.left.parent = node
+                return node.left
+            else:
+                node.right = Node(newNodeName)
+                node.right.parent = node
+                return node.right
 
-    def annotate(self): 
+    def annotate(self):
         currentSub = 2
         for node in self.list:
-            stack = [] 
+            stack = []
             currentNode = node
             while currentNode.subscript == -1:
                 #print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
                 stack.append(currentNode)
                 if currentNode.parent != None:
                     #print("going up" + currentNode.name)
-                    currentNode = currentNode.parent               
+                    currentNode = currentNode.parent
 
             while stack:
-                node = stack.pop() 
+                node = stack.pop()
                 #print("pop node " + node.name)
                 node.superscript = node.parent.subscript
                 currentSub = currentSub + 1
@@ -72,15 +71,15 @@ class Tree:
                 stack.append(node.right)
             if node.left:
                 stack.append(node.left)
-tree = Tree() 
- 
-#TP = tree.add(None, "TP", "") 
-#Tbar = tree.add(TP, "Tbar", "1") 
-#T = tree.add(Tbar, "T", "0") 
-#VP = tree.add(Tbar, "VP", "1") 
-#John = tree.add(VP, "John", "0") 
-#Vbar = tree.add(VP, "Vbar", "1") 
-#likes = tree.add(Vbar, "likes", "0") 
+tree = Tree()
+
+#TP = tree.add(None, "TP", "")
+#Tbar = tree.add(TP, "Tbar", "1")
+#T = tree.add(Tbar, "T", "0")
+#VP = tree.add(Tbar, "VP", "1")
+#John = tree.add(VP, "John", "0")
+#Vbar = tree.add(VP, "Vbar", "1")
+#likes = tree.add(Vbar, "likes", "0")
 #Mary = tree.add(Vbar, "Mary", "1")
 
 #list = [John, T, likes, Mary]
