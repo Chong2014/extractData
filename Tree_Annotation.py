@@ -63,9 +63,15 @@ class Tree:
                 print("Invalid sub/super for node " + node.name)
                 return False
             if node.subscript - node.superscript > 2:
-                print("\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
+                if node in list:
+                    print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
+                else:
+                    print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
             else:
-                print("\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
+                if node in list:
+                    print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
+                else:
+                    print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
 
             if node.right:
                 stack.append(node.right)
