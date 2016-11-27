@@ -14,8 +14,8 @@ class Tree:
     def getRoot(self):
         return self.root
 
-    def setList(self, list):
-        self.list = list
+    def setString(self, string):
+        self.string = string
         return
 
     def add(self, node, newNodeName, leftOrRight):
@@ -34,11 +34,11 @@ class Tree:
 
     def annotate(self):
         currentSub = 2
-        for node in self.list:
+        for node in self.string:
             stack = []
             currentNode = node
             while currentNode.subscript == -1:
-                #print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
+                print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
                 stack.append(currentNode)
                 if currentNode.parent != None:
                     print("going up " + currentNode.name)
@@ -59,6 +59,11 @@ class Tree:
         stack = [self.root]
         while stack:
             node = stack.pop()
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+
             if node.subscript == -1 or node.superscript == -1:
                 print("Invalid sub/super for node " + node.name)
                 return False
@@ -67,10 +72,7 @@ class Tree:
             else:
                 print("\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
 
-            if node.right:
-                stack.append(node.right)
-            if node.left:
-                stack.append(node.left)
+
 tree = Tree()
 
 #TP = tree.add(None, "TP", "")
@@ -82,7 +84,7 @@ tree = Tree()
 #likes = tree.add(Vbar, "likes", "0")
 #Mary = tree.add(Vbar, "Mary", "1")
 
-#list = [John, T, likes, Mary]
+#string = [John, T, likes, Mary]
 
 XP1 = tree.add(None, "XP1", "")
 XP2 = tree.add(XP1, "XP2", "1")
@@ -96,8 +98,9 @@ d = tree.add(XP7, "d", "0")
 a = tree.add(XP7, "a", "1")
 e = tree.add(XP8, "e", "0")
 f = tree.add(XP8, "f", "1")
-list = [a, b, c, d, e, f]
 
-tree.setList(list)
+string = [a, b, c, d, e, f]
+
+tree.setString(string)
 tree.annotate()
 tree.printTree()
