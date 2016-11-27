@@ -41,12 +41,12 @@ class Tree:
                 #print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
                 stack.append(currentNode)
                 if currentNode.parent != None:
-                    #print("going up" + currentNode.name)
+                    print("going up " + currentNode.name)
                     currentNode = currentNode.parent
 
             while stack:
                 node = stack.pop()
-                #print("pop node " + node.name)
+                print("pop node " + node.name)
                 node.superscript = node.parent.subscript
                 currentSub = currentSub + 1
                 node.subscript = currentSub
@@ -63,15 +63,9 @@ class Tree:
                 print("Invalid sub/super for node " + node.name)
                 return False
             if node.subscript - node.superscript > 2:
-                if node in list:
-                    print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
-                else:
-                    print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
+                print("\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
             else:
-                if node in list:
-                    print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
-                else:
-                    print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
+                print("\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
 
             if node.right:
                 stack.append(node.right)
