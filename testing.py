@@ -34,6 +34,26 @@ class Tree:
                 node.right.parent = node
                 return node.right
 
+    def annotate(self):
+        currentSub = 2
+        for node in self.string:
+            stack = []
+            currentNode = node
+            while currentNode.subscript == -1:
+                print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
+                stack.append(currentNode)
+                if currentNode.parent != None:
+                    print("going up " + currentNode.name)
+                    currentNode = currentNode.parent
+
+            while stack:
+                node = stack.pop()
+                print("pop node " + node.name)
+                node.superscript = node.parent.subscript
+                currentSub = currentSub + 1
+                node.subscript = currentSub
+        return True
+
     def traversePreOrderTree(self):
         if not self.root:
             print("tree is empty")
@@ -47,6 +67,7 @@ class Tree:
                 stack.append(node.right)
             if node.left:
                 stack.append(node.left)
+
             print s
 
 
