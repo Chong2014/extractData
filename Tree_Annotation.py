@@ -38,7 +38,7 @@ class Tree:
             stack = []
             currentNode = node
             while currentNode.subscript == -1:
-                print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
+                #print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
                 stack.append(currentNode)
                 if currentNode.parent != None:
                     print("going up " + currentNode.name)

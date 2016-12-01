@@ -5,7 +5,6 @@ class Node:
         self.left = None
         self.right = None
         self.parent = None
-        self.children = None
         self.subscript = subscript
         self.superscript = superscript
 class Tree:
@@ -18,6 +17,14 @@ class Tree:
 
     def setString(self, string):
         self.string = string
+        return
+
+    def setLinear(self, linear):
+        self.linear = linear
+        return
+
+    def setmyDict(self, myDict):
+        self.myDict = myDict
         return
 
     def add(self, node, newNodeName, leftOrRight):
@@ -34,41 +41,38 @@ class Tree:
                 node.right.parent = node
                 return node.right
 
-    def annotate(self):
-        currentSub = 2
-        for node in self.string:
-            stack = []
-            currentNode = node
-            while currentNode.subscript == -1:
-                print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
-                stack.append(currentNode)
-                if currentNode.parent != None:
-                    print("going up " + currentNode.name)
-                    currentNode = currentNode.parent
-
-            while stack:
-                node = stack.pop()
-                print("pop node " + node.name)
-                node.superscript = node.parent.subscript
-                currentSub = currentSub + 1
-                node.subscript = currentSub
-        return True
-
     def traversePreOrderTree(self):
         if not self.root:
             print("tree is empty")
             return False
         stack = [self.root]
-        s = []
+        s1 = []
         while stack:
             node = stack.pop()
-            s.append(node.name)
+            s1.append(str("[") + node.name)
             if node.right:
                 stack.append(node.right)
             if node.left:
                 stack.append(node.left)
+        print s1
+            #print ("going up" + node.name)
 
-            print s
+    def addCloseBrackets(self):
+        s2 = []
+        for key, value in myDict.items():
+            if value == "1": # key is three strings: "a", "c", "f"
+                s2.append(key)
+        #print s2
+        stack2 = []
+        for node in self.linear:
+            currentNode = node
+            while currentNode.subscript == -1:
+                for node.name in s2:
+                    stack2.append(node.name)
+                    if node.parent != None:
+                        node = node.parent
+                        print("going up " + node.name)
+
 
 
 
@@ -105,6 +109,11 @@ e = tree.add(XP8, "e", "0")
 f = tree.add(XP8, "f", "1")
 
 string = [a, b, c, d, e, f]
+linear = [f, e, a, d, c, b]
+myDict = {"f":"1", "e":"0", "a":"1", "d":"0", "c":"1", "b":"0"}
 
+tree.setmyDict(myDict)
 tree.setString(string)
+tree.setLinear(linear)
 tree.traversePreOrderTree()
+tree.addCloseBrackets()
