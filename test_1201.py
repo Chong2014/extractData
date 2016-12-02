@@ -131,7 +131,6 @@ linear = [f, e, a, d, c, b]
 myDict = {"f":"1", "e":"0", "a":"1", "d":"0", "c":"1", "b":"0"}
 rightList = [XP2, XP4, XP8]
 
-
 tree.setmyDict(myDict)
 tree.setString(string)
 tree.setLinear(linear)
