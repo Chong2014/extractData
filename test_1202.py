@@ -67,20 +67,22 @@ class Tree:
     def closeBrackets(self):
         stack = [self.root]
         stackRight = []
+        stackRightName = []
         while stack:
             node = stack.pop()
             if node.right:
                 stack.append(node.right)
-                stackRight.append(node.right.name)
+                stackRight.append(node.right)
+                stackRightName.append(node.right.name)
             if node.left:
                 stack.append(node.left)
         for node in linear:
             stack2 = []
-            if node.name in stackRight: #three ordered strings: f, a, c
+            if node.name in stackRightName:
                 stack2.append(node.name)
                 for node.name in stack2:
                     if node.parent != None:
-                        if node.parent in rightList:
+                        if node.parent in stackRight:
                             node = node.parent
                             stack2.append(node.name)
                 print stack2
@@ -124,12 +126,9 @@ f = tree.add(XP8, "f", "1")
 
 string = [a, b, c, d, e, f]
 linear = [f, e, a, d, c, b]
-rightList = [XP2, XP4, XP8]
-
 
 tree.setString(string)
 tree.setLinear(linear)
-tree.setRightList(rightList)
 tree.annotate()
 tree.closeBrackets()
 tree.printTree()
