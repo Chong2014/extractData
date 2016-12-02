@@ -50,53 +50,29 @@ class Tree:
             stack = []
             currentNode = node
             while currentNode.subscript == -1:
-                #print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
                 stack.append(currentNode)
                 if currentNode.parent != None:
-                    #print("going up " + currentNode.name)
                     currentNode = currentNode.parent
 
             while stack:
                 node = stack.pop()
-                #print("pop node " + node.name)
                 node.superscript = node.parent.subscript
                 currentSub = currentSub + 1
                 node.subscript = currentSub
-        return True
 
-    def closeBrackets(self):
-        stack = [self.root]
+    def printTree(self):
+        stackAll = [self.root]
         stackRight = []
         stackRightName = []
-        while stack:
-            node = stack.pop()
+        while stackAll:
+            node = stackAll.pop()
             if node.right:
-                stack.append(node.right)
+                stackAll.append(node.right)
                 stackRight.append(node.right)
                 stackRightName.append(node.right.name)
             if node.left:
-                stack.append(node.left)
-        for node in linear:
-            stack2 = []
-            if node.name in stackRightName:
-                stack2.append(node.name)
-                for node.name in stack2:
-                    if node.parent != None:
-                        if node.parent in stackRight:
-                            node = node.parent
-                            stack2.append(node.name)
-                print stack2
-                print len(stack2)
+                stackAll.append(node.left)
 
-    def printTree(self):
-        stack = [self.root]
-        stackRight = []
-        while stack:
-            node = stack.pop()
-            if node.right:
-                stack.append(node.right)
-            if node.left:
-                stack.append(node.left)
             if node in string:
                 if node.subscript - node.superscript > 2:
                     print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
@@ -108,6 +84,17 @@ class Tree:
                 else:
                     print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
 
+        for node in linear:
+            stack2 = []
+            if node.name in stackRightName:
+                stack2.append(node.name)
+                for node.name in stack2:
+                    if node.parent != None:
+                        if node.parent in stackRight:
+                            node = node.parent
+                            stack2.append(node.name)
+                print stack2
+                print len(stack2)
 
 tree = Tree()
 
@@ -130,5 +117,4 @@ linear = [f, e, a, d, c, b]
 tree.setString(string)
 tree.setLinear(linear)
 tree.annotate()
-tree.closeBrackets()
 tree.printTree()
