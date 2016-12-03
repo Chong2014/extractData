@@ -22,14 +22,6 @@ class Tree:
         self.linear = linear
         return
 
-    def setRightList(self, rightList):
-        self.rightList = rightList
-        return
-
-    def setmyDict(self, myDict):
-        self.myDict = myDict
-        return
-
     def add(self, node, newNodeName, leftOrRight):
         if(self.root == None):
             self.root = Node(newNodeName, 1, 2)
@@ -50,51 +42,29 @@ class Tree:
             stack = []
             currentNode = node
             while currentNode.subscript == -1:
-                #print("sub == -1" + currentNode.name + "," + str(currentNode.superscript))
                 stack.append(currentNode)
                 if currentNode.parent != None:
-                    #print("going up " + currentNode.name)
                     currentNode = currentNode.parent
 
             while stack:
                 node = stack.pop()
-                #print("pop node " + node.name)
                 node.superscript = node.parent.subscript
                 currentSub = currentSub + 1
                 node.subscript = currentSub
-        return True
-
-    def closeBrackets(self):
-        stack = [self.root]
-        stackRight = []
-        while stack:
-            node = stack.pop()
-            if node.right:
-                stack.append(node.right)
-                stackRight.append(node.right.name)
-            if node.left:
-                stack.append(node.left)
-        for node in linear:
-            stack2 = []
-            if node.name in stackRight: #three ordered strings: f, a, c
-                stack2.append(node.name)
-                for node.name in stack2:
-                    if node.parent != None:
-                        if node.parent in rightList:
-                            node = node.parent
-                            stack2.append(node.name)
-                print stack2
-                print len(stack2)
 
     def printTree(self):
-        stack = [self.root]
+        stackAll = [self.root]
         stackRight = []
-        while stack:
-            node = stack.pop()
+        stackRightName = []
+        while stackAll:
+            node = stackAll.pop()
             if node.right:
-                stack.append(node.right)
+                stackAll.append(node.right)
+                stackRight.append(node.right)
+                stackRightName.append(node.right.name)
             if node.left:
-                stack.append(node.left)
+                stackAll.append(node.left)
+
             if node in string:
                 if node.subscript - node.superscript > 2:
                     print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
@@ -106,6 +76,20 @@ class Tree:
                 else:
                     print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
 
+        for node in linear:
+            stack2 = []
+            if node.name in stackRightName:
+                stack2.append(node.name)
+                for node.name in stack2:
+                    if node.parent != None:
+                        if node.parent in stackRight:
+                            node = node.parent
+                            stack2.append(node.name)
+                #print stack2
+                #print len(stack2)
+            for node in string:
+                if node.name in stack2:
+                    print node.name + "]"*len(stack2)
 
 tree = Tree()
 
@@ -124,12 +108,8 @@ f = tree.add(XP8, "f", "1")
 
 string = [a, b, c, d, e, f]
 linear = [f, e, a, d, c, b]
-rightList = [XP2, XP4, XP8]
-
 
 tree.setString(string)
 tree.setLinear(linear)
-tree.setRightList(rightList)
 tree.annotate()
-tree.closeBrackets()
 tree.printTree()
