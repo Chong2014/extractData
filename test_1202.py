@@ -22,14 +22,6 @@ class Tree:
         self.linear = linear
         return
 
-    def setRightList(self, rightList):
-        self.rightList = rightList
-        return
-
-    def setmyDict(self, myDict):
-        self.myDict = myDict
-        return
-
     def add(self, node, newNodeName, leftOrRight):
         if(self.root == None):
             self.root = Node(newNodeName, 1, 2)
@@ -73,7 +65,7 @@ class Tree:
             if node.left:
                 stackAll.append(node.left)
 
-            if node in string:
+            """if node in string:
                 if node.subscript - node.superscript > 2:
                     print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
                 else:
@@ -82,7 +74,7 @@ class Tree:
                 if node.subscript - node.superscript > 2:
                     print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
                 else:
-                    print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
+                    print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")"""
 
         for node in linear:
             stack2 = []
@@ -95,6 +87,38 @@ class Tree:
                             stack2.append(node.name)
                 print stack2
                 print len(stack2)
+            for node in string:
+                if node.name in stack2:
+                    print node.name + "]"*len(stack2)
+
+                    stackAll = [self.root]
+                    stackRight = []
+                    stackRightName = []
+                    while stackAll:
+                        node = stackAll.pop()
+                        if node.right:
+                            stackAll.append(node.right)
+                            stackRight.append(node.right)
+                            stackRightName.append(node.right.name)
+                        if node.left:
+                            stackAll.append(node.left)
+                        if node in string:
+                            if node.subscript - node.superscript > 2:
+                                if node.name in stackRightName:
+                                    print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]" + "]"*len(stack2))
+                                else:
+                                    print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
+
+                            else:
+                                if node.name in stackRightName:
+                                    print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]" + "]"*len(stack2))
+                                else:
+                                    print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
+                        else:
+                            if node.subscript - node.superscript > 2:
+                                print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
+                            else:
+                                print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}")
 
 tree = Tree()
 
