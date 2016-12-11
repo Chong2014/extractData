@@ -1,3 +1,4 @@
+
 class Node:
     def __init__(self, name, superscript = -1, subscript = -1):
         self.name = name
@@ -23,11 +24,11 @@ class Tree:
         return
 
     def add(self, node, newNodeName, leftOrRight):
-        if(self.root == None):
+        if self.root == None:
             self.root = Node(newNodeName, 1, 2)
             return self.root
         else:
-            if(leftOrRight == "0"):
+            if leftOrRight == "0":
                 node.left = Node(newNodeName)
                 node.left.parent = node
                 return node.left
@@ -67,7 +68,7 @@ class Tree:
 
             if node in string:
                 if node.subscript - node.superscript > 2:
-                    print("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
+                    print ("[\BLab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
                 else:
                     print("[\Lab{" + node.name + "}{" + str(node.superscript) + "}{" + str(node.subscript) + "}]")
             else:
@@ -89,7 +90,7 @@ class Tree:
                 #print len(stack2)
             for node in string:
                 if node.name in stack2:
-                    print node.name + "]"*len(stack2)
+                    print (node.name + "]"*len(stack2))
 
 tree = Tree()
 
@@ -109,7 +110,5 @@ f = tree.add(XP8, "f", "1")
 string = [a, b, c, d, e, f]
 linear = [f, e, a, d, c, b]
 
-tree.setString(string)
-tree.setLinear(linear)
 tree.annotate()
 tree.printTree()
